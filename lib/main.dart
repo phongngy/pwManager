@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:pwsafe/fixValues/mytheme.dart';
 import 'package:pwsafe/pages/pwlist.dart';
 import 'package:pwsafe/provider/pw_provider.dart';
 
@@ -17,9 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: myTheme(),
       home: const PWList(),
     );
   }

@@ -16,7 +16,6 @@ class _FormularState extends State<Formular> {
   final titelController = TextEditingController();
   final benutzerController = TextEditingController();
   final pw1Controller = TextEditingController();
-  final pw2Controller = TextEditingController();
   late Color _color = AppColor.lila;
 
   bool _pwvisible = true;
@@ -25,7 +24,6 @@ class _FormularState extends State<Formular> {
     titelController.dispose();
     benutzerController.dispose();
     pw1Controller.dispose();
-    pw2Controller.dispose();
     super.dispose();
   }
 
@@ -45,6 +43,7 @@ class _FormularState extends State<Formular> {
                 controller: titelController,
                 decoration: const InputDecoration(
                   hintText: 'Titel eingeben',
+                  prefixIcon: Icon(Icons.title),
                 ),
                 validator: (String? value) {
                   if (value == null || value.isEmpty) {
@@ -53,17 +52,21 @@ class _FormularState extends State<Formular> {
                   return null;
                 },
               ),
-              TextFormField(
-                controller: benutzerController,
-                decoration: const InputDecoration(
-                  hintText: 'Benutzername eingeben',
+              Padding(
+                padding: const EdgeInsets.only(top: 16.0, bottom: 16),
+                child: TextFormField(
+                  controller: benutzerController,
+                  decoration: const InputDecoration(
+                    hintText: 'Benutzername eingeben',
+                    prefixIcon: Icon(Icons.person),
+                  ),
+                  validator: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Bitte fülle das Feld';
+                    }
+                    return null;
+                  },
                 ),
-                validator: (String? value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Bitte fülle das Feld';
-                  }
-                  return null;
-                },
               ),
               TextFormField(
                 controller: pw1Controller,
@@ -76,6 +79,7 @@ class _FormularState extends State<Formular> {
                 },
                 decoration: InputDecoration(
                   hintText: 'Passwort eingeben',
+                  prefixIcon: const Icon(Icons.lock),
                   suffixIcon: IconButton(
                       onPressed: () {
                         setState(() {
@@ -89,43 +93,42 @@ class _FormularState extends State<Formular> {
                           : const Icon(Icons.visibility_off)),
                 ),
               ),
-              TextFormField(
-                controller: pw2Controller,
-                obscureText: _pwvisible,
-                decoration: const InputDecoration(
-                  hintText: 'Passwort bestaetigen',
+              Padding(
+                padding: const EdgeInsets.only(top: 16.0, bottom: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    const Text(
+                      "Wähle Farbe:",
+                    ),
+                    DropdownButton<Color>(
+                        value: _color,
+                        icon: const Icon(Icons.arrow_downward,
+                            color: AppColor.secondary),
+                        elevation: 0,
+                        items: <Color>[
+                          AppColor.lila,
+                          AppColor.hellbraun,
+                          AppColor.orange,
+                          AppColor.pink
+                        ].map<DropdownMenuItem<Color>>((Color item) {
+                          return DropdownMenuItem<Color>(
+                              value: item,
+                              child: Container(width: 50, color: item));
+                        }).toList(),
+                        onChanged: (Color? value) {
+                          setState(() {
+                            _color = (value!);
+                          });
+                        }),
+                  ],
                 ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  const Text("Wähle Farbe:"),
-                  DropdownButton<Color>(
-                      value: _color,
-                      icon: const Icon(Icons.arrow_downward),
-                      items: <Color>[
-                        AppColor.lila,
-                        AppColor.hellbraun,
-                        AppColor.orange,
-                        AppColor.pink
-                      ].map<DropdownMenuItem<Color>>((Color item) {
-                        return DropdownMenuItem<Color>(
-                            value: item,
-                            child: Container(width: 50, color: item));
-                      }).toList(),
-                      onChanged: (Color? value) {
-                        setState(() {
-                          _color = (value!);
-                        });
-                      }),
-                ],
               ),
               Padding(
                 padding: const EdgeInsets.all(24),
                 child: ElevatedButton(
                   onPressed: () {
-                    if (pw1Controller.text == pw2Controller.text &&
-                        _formKey.currentState!.validate()) {
+                    if (_formKey.currentState!.validate()) {
                       Provider.of<PWProvider>(context, listen: false).add(
                         Passwort(
                             titel: titelController.text,

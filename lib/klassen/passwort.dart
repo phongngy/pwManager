@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pwsafe/fixValues/mycolor.dart';
 import 'package:pwsafe/klassen/verschluesselung.dart';
-import 'package:encrypt/encrypt.dart' as encrypt;
 
 class Passwort {
   late var benutzername;

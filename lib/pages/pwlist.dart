@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:pwsafe/fixValues/mycolor.dart';
 import 'package:pwsafe/klassen/passwort.dart';
 import 'package:pwsafe/pages/hinzufuegen.dart';
 import 'package:pwsafe/provider/pw_provider.dart';
@@ -45,22 +46,34 @@ class _PWListState extends State<PWList> {
               pwprovider.delete(pwlist[index]);
             },
             background: Container(
-              color: Colors.red,
+              margin: const EdgeInsets.only(top: 16, bottom: 8),
+              decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                      colors: [pwlist[index].color, AppColor.background],
+                      begin: Alignment.centerLeft,
+                      end: const Alignment(0.0, 0.5))),
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: const [
                       Icon(Icons.delete, color: Colors.white),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text("Löschen")
                     ]),
               ),
             ),
             key: UniqueKey(),
-            child: PWListTile(
-                pwObjekt: pwlist[index],
-                titel: pwlist[index].titel,
-                farbe: pwlist[index].color,
-                context: context),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+              child: PWListTile(
+                  pwObjekt: pwlist[index],
+                  titel: pwlist[index].titel,
+                  farbe: pwlist[index].color,
+                  context: context),
+            ),
           ),
         ),
       ),

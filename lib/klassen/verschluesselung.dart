@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:encrypt/encrypt.dart' as encrypt;
 
 class Verschluesselung {
@@ -13,8 +11,7 @@ class Verschluesselung {
 
   static encryptFernet(text) {
     final encrypted = encrypterFernet.encrypt(text);
-    print(encrypted.base64);
-    print(fernet.extractTimestamp(encrypted.bytes)); // unix timestamp
+    //print(fernet.extractTimestamp(encrypted.bytes)); // unix timestamp
     return encrypted.base64;
   }
 

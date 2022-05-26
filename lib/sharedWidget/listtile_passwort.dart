@@ -9,7 +9,13 @@ Widget PWListTile(
     required BuildContext context,
     required farbe}) {
   return Container(
-    color: farbe,
+    decoration: BoxDecoration(
+      border: Border.all(color: Colors.white),
+      borderRadius: const BorderRadius.all(
+        Radius.circular(16),
+      ),
+      color: farbe,
+    ),
     child: ListTile(
       title: Text(titel),
       subtitle: Text(pwObjekt.benutzername),
@@ -30,7 +36,7 @@ Widget PWListTile(
                 ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text("Passwort gespeichert")));
               },
-              icon: const Icon(Icons.copy),
+              icon: const Icon(Icons.password),
               tooltip: "Passwort speichern"),
           IconButton(
               onPressed: () {
