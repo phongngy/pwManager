@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:pwsafe/klassen/passwort.dart';
 import 'package:pwsafe/pages/bearbeiten.dart';
 
-Widget PWListTile(
+Widget pwListTile(
     {required Passwort pwObjekt,
     required String titel,
     required BuildContext context,

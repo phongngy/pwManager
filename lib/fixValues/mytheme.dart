@@ -27,10 +27,14 @@ ThemeData myTheme() {
       focusColor: AppColor.secondary,
       suffixIconColor: AppColor.secondary,
       prefixIconColor: Colors.white,
-      border: OutlineInputBorder(
-        borderSide: BorderSide(
-          width: 32,
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(width: 4, color: Colors.white),
+        borderRadius: BorderRadius.all(
+          Radius.circular(24),
         ),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide(width: 4, color: Colors.white),
         borderRadius: BorderRadius.all(
           Radius.circular(24),
         ),

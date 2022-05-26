@@ -3,9 +3,9 @@ import 'package:pwsafe/fixValues/mycolor.dart';
 import 'package:pwsafe/klassen/verschluesselung.dart';
 
 class Passwort {
-  late var benutzername;
-  late var passwort;
-  late var titel;
+  late String benutzername;
+  late String passwort;
+  late String titel;
   late Color color;
 
   String? id;

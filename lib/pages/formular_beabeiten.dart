@@ -5,8 +5,8 @@ import 'package:pwsafe/klassen/passwort.dart';
 import 'package:pwsafe/provider/pw_provider.dart';
 
 class FormularBearbeiten extends StatefulWidget {
-  Passwort pw;
-  FormularBearbeiten({Key? key, required this.pw}) : super(key: key);
+  final Passwort pw;
+  const FormularBearbeiten({Key? key, required this.pw}) : super(key: key);
 
   @override
   State<FormularBearbeiten> createState() => _FormularBearbeitenState();

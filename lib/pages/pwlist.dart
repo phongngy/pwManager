@@ -68,7 +68,7 @@ class _PWListState extends State<PWList> {
             key: UniqueKey(),
             child: Padding(
               padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
-              child: PWListTile(
+              child: pwListTile(
                   pwObjekt: pwlist[index],
                   titel: pwlist[index].titel,
                   farbe: pwlist[index].color,
