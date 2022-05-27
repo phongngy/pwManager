@@ -10,7 +10,7 @@ class BearbeitenPW extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Passwort hinzufuegen"),
+          title: const Text("Passwort bearbeiten"),
         ),
         body: Center(
             child: FormularBearbeiten(

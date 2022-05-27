@@ -20,21 +20,25 @@ ThemeData myTheme() {
     ),
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
-          backgroundColor:
-              MaterialStateProperty.all<Color>(AppColor.secondary)),
+        backgroundColor: MaterialStateProperty.all<Color>(AppColor.secondary),
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16.0),
+        )),
+      ),
     ),
     inputDecorationTheme: const InputDecorationTheme(
       focusColor: AppColor.secondary,
       suffixIconColor: AppColor.secondary,
       prefixIconColor: Colors.white,
       focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(width: 4, color: Colors.white),
+        borderSide: BorderSide(width: 4, color: AppColor.secondary),
         borderRadius: BorderRadius.all(
           Radius.circular(24),
         ),
       ),
       enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(width: 4, color: Colors.white),
+        borderSide: BorderSide(width: 2, color: Colors.white),
         borderRadius: BorderRadius.all(
           Radius.circular(24),
         ),

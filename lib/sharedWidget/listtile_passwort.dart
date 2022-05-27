@@ -18,7 +18,7 @@ Widget pwListTile(
     ),
     child: ListTile(
       title: Text(titel),
-      subtitle: Text(pwObjekt.benutzername),
+      subtitle: Text(pwObjekt.benutzername ?? ""),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [

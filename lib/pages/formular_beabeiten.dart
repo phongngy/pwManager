@@ -16,7 +16,7 @@ class _FormularBearbeitenState extends State<FormularBearbeiten> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final titelController = TextEditingController();
   final benutzerController = TextEditingController();
-  final pw1Controller = TextEditingController();
+  final pwController = TextEditingController();
   late Color _color;
 
   bool _pwvisible = true;
@@ -24,8 +24,8 @@ class _FormularBearbeitenState extends State<FormularBearbeiten> {
   @override
   void initState() {
     titelController.text = widget.pw.titel;
-    benutzerController.text = widget.pw.benutzername;
-    pw1Controller.text = widget.pw.passwort;
+    benutzerController.text = widget.pw.benutzername ?? "";
+    pwController.text = widget.pw.passwort;
     _color = widget.pw.color;
     super.initState();
   }
@@ -34,7 +34,7 @@ class _FormularBearbeitenState extends State<FormularBearbeiten> {
   void dispose() {
     titelController.dispose();
     benutzerController.dispose();
-    pw1Controller.dispose();
+    pwController.dispose();
     super.dispose();
   }
 
@@ -52,6 +52,7 @@ class _FormularBearbeitenState extends State<FormularBearbeiten> {
             children: <Widget>[
               TextFormField(
                 controller: titelController,
+                textInputAction: TextInputAction.next,
                 decoration: const InputDecoration(
                   hintText: 'Titel eingeben',
                   prefixIcon: Icon(Icons.title),
@@ -67,20 +68,15 @@ class _FormularBearbeitenState extends State<FormularBearbeiten> {
                 padding: const EdgeInsets.only(top: 16.0, bottom: 16),
                 child: TextFormField(
                   controller: benutzerController,
+                  textInputAction: TextInputAction.next,
                   decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.person),
                     hintText: 'Benutzername eingeben',
                   ),
-                  validator: (String? value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Bitte fülle das Feld';
-                    }
-                    return null;
-                  },
                 ),
               ),
               TextFormField(
-                controller: pw1Controller,
+                controller: pwController,
                 obscureText: _pwvisible,
                 validator: (String? value) {
                   if (value == null || value.isEmpty) {
@@ -147,7 +143,7 @@ class _FormularBearbeitenState extends State<FormularBearbeiten> {
                             id: widget.pw.id,
                             titel: titelController.text,
                             benutzername: benutzerController.text,
-                            passwort: pw1Controller.text,
+                            passwort: pwController.text,
                             color: _color),
                       );
                       Navigator.pop(context);
@@ -155,7 +151,7 @@ class _FormularBearbeitenState extends State<FormularBearbeiten> {
                       throw Exception("Passwörter nicht gleich");
                     }
                   },
-                  child: const Text("Erstellen"),
+                  child: const Text("Bearbeiten"),
                 ),
               )
             ],

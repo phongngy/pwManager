@@ -15,7 +15,7 @@ class _FormularState extends State<Formular> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final titelController = TextEditingController();
   final benutzerController = TextEditingController();
-  final pw1Controller = TextEditingController();
+  final pwController = TextEditingController();
   late Color _color = AppColor.lila;
 
   bool _pwvisible = true;
@@ -23,7 +23,7 @@ class _FormularState extends State<Formular> {
   void dispose() {
     titelController.dispose();
     benutzerController.dispose();
-    pw1Controller.dispose();
+    pwController.dispose();
     super.dispose();
   }
 
@@ -41,6 +41,7 @@ class _FormularState extends State<Formular> {
             children: <Widget>[
               TextFormField(
                 controller: titelController,
+                textInputAction: TextInputAction.next,
                 decoration: const InputDecoration(
                   hintText: 'Titel eingeben',
                   prefixIcon: Icon(Icons.title),
@@ -56,20 +57,15 @@ class _FormularState extends State<Formular> {
                 padding: const EdgeInsets.only(top: 16.0, bottom: 16),
                 child: TextFormField(
                   controller: benutzerController,
+                  textInputAction: TextInputAction.next,
                   decoration: const InputDecoration(
                     hintText: 'Benutzername eingeben',
                     prefixIcon: Icon(Icons.person),
                   ),
-                  validator: (String? value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Bitte fülle das Feld';
-                    }
-                    return null;
-                  },
                 ),
               ),
               TextFormField(
-                controller: pw1Controller,
+                controller: pwController,
                 obscureText: _pwvisible,
                 validator: (String? value) {
                   if (value == null || value.isEmpty) {
@@ -133,7 +129,7 @@ class _FormularState extends State<Formular> {
                         Passwort(
                             titel: titelController.text,
                             benutzername: benutzerController.text,
-                            passwort: pw1Controller.text,
+                            passwort: pwController.text,
                             color: _color),
                       );
                       Navigator.pop(context);

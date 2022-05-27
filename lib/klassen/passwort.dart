@@ -3,7 +3,7 @@ import 'package:pwsafe/fixValues/mycolor.dart';
 import 'package:pwsafe/klassen/verschluesselung.dart';
 
 class Passwort {
-  late String benutzername;
+  late String? benutzername;
   late String passwort;
   late String titel;
   late Color color;
@@ -11,7 +11,7 @@ class Passwort {
   String? id;
 
   Passwort(
-      {required this.benutzername,
+      {this.benutzername,
       required this.passwort,
       required this.titel,
       required this.color,
@@ -19,7 +19,7 @@ class Passwort {
 
   Map<String, dynamic> toJson() => {
         'id': id ?? "",
-        'benutzername': benutzername,
+        'benutzername': benutzername ?? "",
         'passwort': Verschluesselung.encryptFernet(passwort),
         'titel': titel,
         'color': color.toString()
