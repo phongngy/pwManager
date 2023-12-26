@@ -136,10 +136,11 @@ class _FormularState extends State<Formular> {
                     if (_formKey.currentState!.validate()) {
                       Provider.of<PWProvider>(context, listen: false).add(
                         Passwort(
-                            titel: titelController.text,
-                            benutzername: benutzerController.text,
-                            passwort: pwController.text,
-                            color: _color),
+                          titel: titelController.text,
+                          benutzername: benutzerController.text,
+                          passwort: pwController.text,
+                          color: _color,
+                        ),
                       );
                       Navigator.pop(context);
                     } else {
