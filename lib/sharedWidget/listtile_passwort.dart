@@ -24,7 +24,8 @@ Widget pwListTile(
         children: [
           IconButton(
               onPressed: () {
-                Clipboard.setData(ClipboardData(text: pwObjekt.benutzername));
+                Clipboard.setData(
+                    ClipboardData(text: pwObjekt.benutzername ?? ''));
                 ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text("Benutzername gespeichert")));
               },

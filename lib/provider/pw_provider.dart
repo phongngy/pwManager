@@ -5,7 +5,7 @@ import 'package:localstore/localstore.dart';
 import 'package:pwsafe/klassen/passwort.dart';
 
 class PWProvider with ChangeNotifier {
-  var _pwList = <Passwort>[];
+  final _pwList = <Passwort>[];
   final _db = Localstore.instance;
 
   UnmodifiableListView<Passwort> get pwList => UnmodifiableListView(_pwList);

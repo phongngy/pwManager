@@ -52,11 +52,11 @@ class _PWListState extends State<PWList> {
                       colors: [pwlist[index].color, AppColor.background],
                       begin: Alignment.centerLeft,
                       end: const Alignment(0.0, 0.5))),
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
+              child: const Padding(
+                padding: EdgeInsets.all(16.0),
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    children: const [
+                    children: [
                       Icon(Icons.delete, color: Colors.white),
                       SizedBox(
                         width: 10,

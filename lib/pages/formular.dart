@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:pwsafe/fixValues/mycolor.dart';
 import 'package:pwsafe/klassen/passwort.dart';
 import 'package:pwsafe/provider/pw_provider.dart';
+import 'dart:math';
 
 class Formular extends StatefulWidget {
   const Formular({Key? key}) : super(key: key);
@@ -90,6 +91,14 @@ class _FormularState extends State<Formular> {
                 ),
               ),
               Padding(
+                  padding: const EdgeInsets.only(top: 16.0, bottom: 16),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      pwController.text = passwordGenerate();
+                    },
+                    child: const Text('Passwort generieren'),
+                  )),
+              Padding(
                 padding: const EdgeInsets.only(top: 16.0, bottom: 16),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -145,5 +154,14 @@ class _FormularState extends State<Formular> {
         ),
       ),
     );
+  }
+
+  passwordGenerate() {
+    const chars =
+        'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#%^&*()_+{}|:<>?-=[];,./';
+    final random = Random.secure();
+    final length = random.nextInt(10) + 8;
+    return List.generate(length, (index) => chars[random.nextInt(chars.length)])
+        .join();
   }
 }

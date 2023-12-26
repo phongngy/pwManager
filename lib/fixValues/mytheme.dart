@@ -11,8 +11,8 @@ ThemeData myTheme() {
       elevation: 0,
     ),
     textTheme: const TextTheme(
-            subtitle1: TextStyle(color: Colors.white),
-            bodyText2: TextStyle(color: Colors.white))
+            titleMedium: TextStyle(color: Colors.white),
+            bodyMedium: TextStyle(color: Colors.white))
         .apply(bodyColor: Colors.white),
     listTileTheme: const ListTileThemeData(
       textColor: Colors.white,
