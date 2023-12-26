@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pwsafe/fixValues/mycolor.dart';
@@ -101,6 +103,14 @@ class _FormularBearbeitenState extends State<FormularBearbeiten> {
                 ),
               ),
               Padding(
+                  padding: const EdgeInsets.only(top: 16.0, bottom: 16),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      pwController.text = passwordGenerate();
+                    },
+                    child: const Text('Passwort generieren'),
+                  )),
+              Padding(
                 padding: const EdgeInsets.only(top: 16.0, bottom: 16),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -159,5 +169,14 @@ class _FormularBearbeitenState extends State<FormularBearbeiten> {
         ),
       ),
     );
+  }
+
+  String passwordGenerate() {
+    const chars =
+        'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#%^&*()_+{}|:<>?-=[];,./';
+    final random = Random.secure();
+    final length = random.nextInt(10) + 8;
+    return List.generate(length, (index) => chars[random.nextInt(chars.length)])
+        .join();
   }
 }
