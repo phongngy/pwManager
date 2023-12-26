@@ -3,8 +3,10 @@ import 'package:provider/provider.dart';
 import 'package:pwsafe/fixValues/mytheme.dart';
 import 'package:pwsafe/pages/pwlist.dart';
 import 'package:pwsafe/provider/pw_provider.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+Future main() async {
+  await dotenv.load(fileName: '.env');
   WidgetsFlutterBinding.ensureInitialized();
 
   runApp(MultiProvider(
