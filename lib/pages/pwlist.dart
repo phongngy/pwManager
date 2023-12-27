@@ -54,15 +54,14 @@ class _PWListState extends State<PWList> {
                       end: const Alignment(0.0, 0.5))),
               child: const Padding(
                 padding: EdgeInsets.all(16.0),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Icon(Icons.delete, color: Colors.white),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text("Löschen")
-                    ]),
+                child:
+                    Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                  Icon(Icons.delete, color: Colors.white),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text("Löschen")
+                ]),
               ),
             ),
             key: UniqueKey(),
