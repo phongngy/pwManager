@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pwsafe/klassen/passwort.dart';
 import 'package:pwsafe/pages/bearbeiten.dart';
+import 'package:pwsafe/sharedWidget/clipboard_alert_dialog.dart';
 
 Widget pwListTile(
     {required Passwort pwObjekt,
@@ -32,10 +33,19 @@ Widget pwListTile(
               icon: const Icon(Icons.copy),
               tooltip: "Benutzername speichern"),
           IconButton(
-              onPressed: () {
+              onPressed: () async {
                 Clipboard.setData(ClipboardData(text: pwObjekt.passwort));
                 ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text("Passwort gespeichert")));
+
+                await Future.delayed(const Duration(seconds: 30));
+
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return ClipboardAlertDialog();
+                  },
+                );
               },
               icon: const Icon(Icons.password),
               tooltip: "Passwort speichern"),

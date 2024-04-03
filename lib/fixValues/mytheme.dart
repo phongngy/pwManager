@@ -21,6 +21,7 @@ ThemeData myTheme() {
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all<Color>(AppColor.secondary),
+        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16.0),
@@ -50,5 +51,10 @@ ThemeData myTheme() {
         actionTextColor: Colors.white,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(top: Radius.circular(32)))),
+    dialogTheme: const DialogTheme(
+      backgroundColor: AppColor.secondary,
+      titleTextStyle: TextStyle(color: Colors.white, fontSize: 28),
+      contentTextStyle: TextStyle(color: Colors.white),
+    ),
   );
 }
