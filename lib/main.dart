@@ -5,11 +5,13 @@ import 'package:pwsafe/fixValues/mytheme.dart';
 import 'package:pwsafe/pages/pwlist.dart';
 import 'package:pwsafe/provider/pw_provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:pwsafe/klassen/get_it.dart' as injector;
 //import 'package:flutter_jailbreak_detection/flutter_jailbreak_detection.dart';
 
 Future main() async {
   await dotenv.load(fileName: '.env');
   WidgetsFlutterBinding.ensureInitialized();
+  injector.init();
 
   runApp(MultiProvider(
       providers: [ChangeNotifierProvider(create: (context) => PWProvider())],
@@ -39,6 +41,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: myTheme(),
       home: const PWList(),
     );

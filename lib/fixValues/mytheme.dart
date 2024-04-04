@@ -56,5 +56,23 @@ ThemeData myTheme() {
       titleTextStyle: TextStyle(color: Colors.white, fontSize: 28),
       contentTextStyle: TextStyle(color: Colors.white),
     ),
+    checkboxTheme: CheckboxThemeData(
+      checkColor: MaterialStateProperty.resolveWith((states) {
+        if (states.contains(MaterialState.selected)) {
+          return Colors
+              .white; // Farbe des Häkchens, wenn die Checkbox ausgewählt ist
+        }
+        return null; // default
+      }),
+      fillColor: MaterialStateProperty.resolveWith((states) {
+        if (states.contains(MaterialState.selected)) {
+          return AppColor
+              .secondary; // Hintergrundfarbe der Checkbox, wenn sie ausgewählt ist
+        }
+        return null; // default
+      }),
+      side:
+          const BorderSide(color: Colors.white), // Umrandungsfarbe der Checkbox
+    ),
   );
 }

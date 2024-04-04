@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pwsafe/fixValues/mycolor.dart';
+import 'package:pwsafe/klassen/get_it.dart';
 import 'package:pwsafe/klassen/passwort.dart';
+import 'package:pwsafe/klassen/passwort_generator.dart';
 import 'package:pwsafe/provider/pw_provider.dart';
-import 'dart:math';
 
 class Formular extends StatefulWidget {
   const Formular({Key? key}) : super(key: key);
@@ -17,6 +18,7 @@ class _FormularState extends State<Formular> {
   final titelController = TextEditingController();
   final benutzerController = TextEditingController();
   final pwController = TextEditingController();
+  final pwGenerator = getItInjector<PasswordGenerator>();
   late Color _color = AppColor.lila;
 
   bool _pwvisible = true;
@@ -94,7 +96,7 @@ class _FormularState extends State<Formular> {
                   padding: const EdgeInsets.only(top: 16.0, bottom: 16),
                   child: ElevatedButton(
                     onPressed: () {
-                      pwController.text = passwordGenerate();
+                      pwController.text = pwGenerator.generate();
                     },
                     child: const Text('Passwort generieren'),
                   )),
@@ -155,14 +157,5 @@ class _FormularState extends State<Formular> {
         ),
       ),
     );
-  }
-
-  passwordGenerate() {
-    const chars =
-        'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#%^&*()_+{}|:<>?-=[];,./';
-    final random = Random.secure();
-    final length = random.nextInt(10) + 8;
-    return List.generate(length, (index) => chars[random.nextInt(chars.length)])
-        .join();
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pwsafe/fixValues/mycolor.dart';
 import 'package:pwsafe/klassen/passwort.dart';
+import 'package:pwsafe/pages/einstellung.dart';
 import 'package:pwsafe/pages/hinzufuegen.dart';
 import 'package:pwsafe/provider/pw_provider.dart';
 import 'package:pwsafe/sharedWidget/listtile_passwort.dart';
@@ -31,10 +32,10 @@ class _PWListState extends State<PWList> {
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const AddPW()));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const Einstellung()));
               },
-              icon: const Icon(Icons.add))
+              icon: const Icon(Icons.settings))
         ],
       ),
       body: Center(
@@ -75,6 +76,13 @@ class _PWListState extends State<PWList> {
             ),
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => const AddPW()));
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }
