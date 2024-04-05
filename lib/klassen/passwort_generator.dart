@@ -23,7 +23,7 @@ class PasswordGenerator {
     if (useSpecialCharacters) chars += '!@#%^&*()_+{}|:<>?-=[];,./';
 
     final random = Random.secure();
-    final length = random.nextInt(1).toInt() + minLength;
+    final length = random.nextInt(10).toInt() + minLength;
 
     List<String> wort = [];
     int wortAnfang = 0;
@@ -61,5 +61,41 @@ class PasswordGenerator {
     }
 
     return pw.join();
+  }
+
+  double evaluatePasswordStrength(String password) {
+    double strength = 0;
+
+    if (RegExp(r'[A-Z]').hasMatch(password)) {
+      strength += 0.2;
+    }
+
+    if (RegExp(r'[a-z]').hasMatch(password)) {
+      strength += 0.2;
+    }
+
+    if (RegExp(r'[0-9]').hasMatch(password)) {
+      strength += 0.2;
+    }
+
+    if (RegExp(r'[!@#%^&*()_+{}|:<>?=\[\];,./]').hasMatch(password)) {
+      strength += 0.2;
+    }
+
+    if (RegExp(r'[a-zA-Z]{3}').hasMatch(password)) {
+      strength += 0.2;
+    }
+
+    if (password.length >= 8) {
+      if (strength + 0.2 > 1) {
+        strength = 1;
+      } else {
+        strength += 0.2;
+      }
+    } else if (strength > 0.6) {
+      strength = 0.6;
+    }
+
+    return strength;
   }
 }

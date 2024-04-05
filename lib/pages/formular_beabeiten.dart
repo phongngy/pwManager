@@ -22,6 +22,7 @@ class _FormularBearbeitenState extends State<FormularBearbeiten> {
   final pwGenerator = getItInjector<PasswordGenerator>();
   late Color _color;
 
+  double passwordStrength = 0;
   bool _pwvisible = true;
 
   @override
@@ -30,7 +31,15 @@ class _FormularBearbeitenState extends State<FormularBearbeiten> {
     benutzerController.text = widget.pw.benutzername ?? "";
     pwController.text = widget.pw.passwort;
     _color = widget.pw.color;
+    passwordStrength = pwGenerator.evaluatePasswordStrength(pwController.text);
     super.initState();
+
+    pwController.addListener(() {
+      setState(() {
+        passwordStrength =
+            pwGenerator.evaluatePasswordStrength(pwController.text);
+      });
+    });
   }
 
   @override
@@ -78,30 +87,41 @@ class _FormularBearbeitenState extends State<FormularBearbeiten> {
                   ),
                 ),
               ),
-              TextFormField(
-                controller: pwController,
-                obscureText: _pwvisible,
-                validator: (String? value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Bitte fülle das Feld';
-                  }
-                  return null;
-                },
-                decoration: InputDecoration(
-                  hintText: 'Passwort eingeben',
-                  prefixIcon: const Icon(Icons.lock),
-                  suffixIcon: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          _pwvisible = !_pwvisible;
-                        });
-                      },
-                      icon: _pwvisible
-                          ? const Icon(
-                              Icons.visibility,
-                            )
-                          : const Icon(Icons.visibility_off)),
-                ),
+              Column(
+                children: [
+                  TextFormField(
+                    controller: pwController,
+                    obscureText: _pwvisible,
+                    validator: (String? value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Bitte fülle das Feld';
+                      }
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                      hintText: 'Passwort eingeben',
+                      prefixIcon: const Icon(Icons.lock),
+                      suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              _pwvisible = !_pwvisible;
+                            });
+                          },
+                          icon: _pwvisible
+                              ? const Icon(
+                                  Icons.visibility,
+                                )
+                              : const Icon(Icons.visibility_off)),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  LinearProgressIndicator(
+                    value: passwordStrength,
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                        getStrengthColor(passwordStrength)),
+                    backgroundColor: AppColor.background,
+                  ),
+                ],
               ),
               Padding(
                   padding: const EdgeInsets.only(top: 16.0, bottom: 16),
@@ -171,5 +191,15 @@ class _FormularBearbeitenState extends State<FormularBearbeiten> {
         ),
       ),
     );
+  }
+}
+
+Color getStrengthColor(double strength) {
+  if (strength > 0.8) {
+    return Colors.green;
+  } else if (strength >= 0.4) {
+    return Colors.yellow;
+  } else {
+    return Colors.red;
   }
 }
