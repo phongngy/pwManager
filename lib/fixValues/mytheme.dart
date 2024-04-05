@@ -6,14 +6,18 @@ ThemeData myTheme() {
     scaffoldBackgroundColor: AppColor.background,
     canvasColor: AppColor.background,
     appBarTheme: const AppBarTheme(
+      foregroundColor: Colors.white,
       backgroundColor: AppColor.background,
       centerTitle: true,
       elevation: 0,
+      iconTheme: IconThemeData(
+        color: Colors.white, // Farbe des Icons
+      ),
     ),
     textTheme: const TextTheme(
-            titleMedium: TextStyle(color: Colors.white),
-            bodyMedium: TextStyle(color: Colors.white))
-        .apply(bodyColor: Colors.white),
+      titleMedium: TextStyle(color: Colors.white),
+      bodyMedium: TextStyle(color: Colors.white),
+    ).apply(bodyColor: Colors.white),
     listTileTheme: const ListTileThemeData(
       textColor: Colors.white,
       iconColor: Colors.white,
@@ -73,6 +77,12 @@ ThemeData myTheme() {
       }),
       side:
           const BorderSide(color: Colors.white), // Umrandungsfarbe der Checkbox
+    ),
+    floatingActionButtonTheme: const FloatingActionButtonThemeData(
+      backgroundColor: AppColor.secondary,
+      foregroundColor: Colors.white, // Farbe des Icons im Button
+      elevation: 2, // Schatten des Buttons
+      shape: CircleBorder(),
     ),
   );
 }
