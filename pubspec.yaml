@@ -39,6 +39,7 @@ dependencies:
   flutter_dotenv: ^5.1.0
   flutter_jailbreak_detection: ^1.10.0
   get_it: ^7.6.8
+  local_auth: ^2.2.0
 
 dev_dependencies:
   flutter_test:

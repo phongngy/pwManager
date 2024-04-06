@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pwsafe/fixValues/mycolor.dart';
 
 class ClipboardAlertDialog extends StatelessWidget {
   @override

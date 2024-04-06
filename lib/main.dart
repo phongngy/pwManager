@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 //import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:pwsafe/fixValues/mytheme.dart';
+import 'package:pwsafe/pages/auth.dart';
 import 'package:pwsafe/pages/pwlist.dart';
 import 'package:pwsafe/provider/pw_provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -43,7 +44,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: myTheme(),
-      home: const PWList(),
+      home: const AuthScreen(), //const PWList(), wenn ohne Fingerprint
     );
   }
 /*
