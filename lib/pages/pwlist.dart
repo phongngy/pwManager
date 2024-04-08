@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pwsafe/fixValues/mycolor.dart';
 import 'package:pwsafe/klassen/passwort.dart';
+import 'package:pwsafe/pages/auth.dart';
 import 'package:pwsafe/pages/einstellung.dart';
 import 'package:pwsafe/pages/hinzufuegen.dart';
 import 'package:pwsafe/provider/pw_provider.dart';
@@ -14,11 +17,45 @@ class PWList extends StatefulWidget {
   State<PWList> createState() => _PWListState();
 }
 
-class _PWListState extends State<PWList> {
+class _PWListState extends State<PWList> with WidgetsBindingObserver {
+  Timer? _timer;
+
   @override
   void initState() {
     Provider.of<PWProvider>(context, listen: false).initPWList();
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  void startTimer() {
+    _timer = null;
+    const delay = Duration(minutes: 10);
+    _timer = Timer(
+      delay,
+      () => Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => const AuthScreen()),
+      ),
+    );
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.inactive ||
+        state == AppLifecycleState.paused ||
+        state == AppLifecycleState.hidden) {
+      startTimer();
+    } else if (state == AppLifecycleState.resumed) {
+      if (_timer != null) {
+        _timer!.cancel();
+        _timer = null;
+      }
+    }
   }
 
   @override
