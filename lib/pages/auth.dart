@@ -17,6 +17,13 @@ class _AuthScreenState extends State<AuthScreen> {
 
   late bool _istAuthentifziert;
   bool _authentifzierungFehlgeschlagen = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _authProzess();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
